@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt';
+import * as bcrypt from 'bcrypt';
 import * as fs from 'fs';
 
 /**
@@ -7,7 +7,7 @@ import * as fs from 'fs';
  * @returns {string}
  */
 export function generateHash(password: string): string {
-  return bcrypt.hashSync(password, 10);
+  return bcrypt.hashSync(password, parseInt(process.env.SALT_ROUNDS ?? '10'));
 }
 
 /**

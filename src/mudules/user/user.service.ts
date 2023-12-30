@@ -3,13 +3,20 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserEntity } from './entities/user.entity';
 import { UserRepository } from './user.repository';
+import { ConflictException } from '@nestjs/common';
+import { generateHash } from '../../common/utils';
 
 @Injectable()
 export class UserService {
   constructor(private readonly userRepository: UserRepository) {}
 
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+  async create(createUserDto: CreateUserDto) {
+    const user = await this.userRepository.findOneByEmail(createUserDto.email);
+    if (user) {
+      throw new ConflictException('Email already exists');
+    }
+    createUserDto.password = generateHash(createUserDto.password);
+    return this.userRepository.create(createUserDto);
   }
 
   findAll() {
