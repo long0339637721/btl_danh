@@ -8,6 +8,7 @@ import { UserEntity } from './mudules/user/entities/user.entity';
 import { LocationEntity } from './mudules/location/entities/location.entity';
 import { CommentModule } from './mudules/comment/comment.module';
 import { CommentEntity } from './mudules/comment/entities/comment.entity';
+import { AuthModule } from './mudules/auth/auth.module';
 
 dotenv.config();
 
@@ -29,6 +30,7 @@ dotenv.config();
     UserModule,
     LocationModule,
     CommentModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],
