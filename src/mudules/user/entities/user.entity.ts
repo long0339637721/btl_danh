@@ -1,10 +1,8 @@
-import { Column, Entity, Index } from 'typeorm';
-import { AbstractEntity } from '../../../../src/common/abstract.entity';
-import { USER_AVATAR_URL } from '../../../constants';
+import { Column, Entity } from 'typeorm';
+import { AbstractEntity } from '../../../common/abstract.entity';
 
 @Entity({ name: 'users' })
 export class UserEntity extends AbstractEntity {
-  @Index()
   @Column({ type: 'varchar', unique: true })
   email: string;
 
@@ -13,7 +11,4 @@ export class UserEntity extends AbstractEntity {
 
   @Column({ type: 'varchar' })
   name: string;
-
-  @Column({ type: 'varchar', default: USER_AVATAR_URL })
-  avatar: string;
 }

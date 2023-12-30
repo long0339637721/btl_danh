@@ -1,28 +1,35 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import dotenv from 'dotenv';
+import * as dotenv from 'dotenv';
 
 import { UserModule } from './mudules/user/user.module';
 import { LocationModule } from './mudules/location/location.module';
 import { UserEntity } from './mudules/user/entities/user.entity';
 import { LocationEntity } from './mudules/location/entities/location.entity';
+import { CommentModule } from './mudules/comment/comment.module';
+import { CommentEntity } from './mudules/comment/entities/comment.entity';
 
 dotenv.config();
 
 @Module({
-  imports: [TypeOrmModule.forRoot({
-    type: 'mssql',
-    host: 'localhost',
-    port: 1433,
-    username: 'add_username',
-    password: 'add_password',
-    database: 'add_dbName',
-    options: {
-      encrypt: false,
-    },
-    synchronize: true,
-    entities: [UserEntity, LocationEntity],
-  }), UserModule, LocationModule],
+  imports: [
+    TypeOrmModule.forRoot({
+      type: 'mssql',
+      host: process.env.DB_HOST,
+      port: parseInt(process.env.DB_PORT ?? '1433'),
+      username: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_DATABASE,
+      options: {
+        encrypt: false,
+      },
+      synchronize: true,
+      entities: [UserEntity, LocationEntity, CommentEntity],
+    }),
+    UserModule,
+    LocationModule,
+    CommentModule,
+  ],
   controllers: [],
   providers: [],
 })
