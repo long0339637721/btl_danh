@@ -32,6 +32,13 @@
 $ npm install
 ```
 
+## Create Enviroment
+
+```bash
+'Create .env file'
+$ cp .env-example .env
+```
+
 ## Running the app
 
 ```bash
@@ -64,9 +71,9 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 ## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- Author - [Longdepzai](https://github.com/long0339637721)
+<!-- - Website - [https://nestjs.com](https://nestjs.com/)
+- Twitter - [@nestframework](https://twitter.com/nestframework) -->
 
 ## License
 
