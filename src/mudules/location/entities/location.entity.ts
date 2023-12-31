@@ -1,5 +1,6 @@
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, OneToMany } from 'typeorm';
 import { AbstractEntity } from '../../../common/abstract.entity';
+import { CommentEntity } from '../../comment/entities/comment.entity';
 
 @Entity({ name: 'locations' })
 export class LocationEntity extends AbstractEntity {
@@ -32,4 +33,7 @@ export class LocationEntity extends AbstractEntity {
 
   @Column({ type: 'varchar' })
   qrCode: string;
+
+  @OneToMany(() => CommentEntity, (comment) => comment.location)
+  comments: CommentEntity[];
 }
