@@ -17,7 +17,9 @@ export class LocationRepository {
         id: id,
       },
       relations: {
-        comments: true,
+        comments: {
+          user: true,
+        },
       },
     });
   }
@@ -32,7 +34,9 @@ export class LocationRepository {
         name: Like(`%${name}%`),
       },
       relations: {
-        comments: true,
+        comments: {
+          user: true,
+        },
       },
     });
   }

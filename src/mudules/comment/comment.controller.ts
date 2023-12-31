@@ -17,10 +17,10 @@ import { ApiTags } from '@nestjs/swagger';
 export class CommentController {
   constructor(private readonly commentService: CommentService) {}
 
-  @Post()
-  create(@Body() createCommentDto: CreateCommentDto) {
-    return this.commentService.create(createCommentDto);
-  }
+  // @Post()
+  // create(@Body() createCommentDto: CreateCommentDto) {
+  //   return this.commentService.create(createCommentDto);
+  // }
 
   @Get()
   findAll() {

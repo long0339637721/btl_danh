@@ -7,12 +7,15 @@ import {
   Param,
   Delete,
   ParseIntPipe,
+  Headers,
+  Query,
 } from '@nestjs/common';
 import { LocationService } from './location.service';
 import { CreateLocationDto } from './dto/create-location.dto';
 import { UpdateLocationDto } from './dto/update-location.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { SearchByNameDto } from './dto/search-by-name.dto';
+import { CreateCommentDto } from './dto/create-comment.dto';
 
 @ApiTags('LOCATION')
 @Controller('location')
@@ -30,7 +33,7 @@ export class LocationController {
   }
 
   @Get('search')
-  search(@Body() searchByNameDto: SearchByNameDto) {
+  search(@Query() searchByNameDto: SearchByNameDto) {
     return this.locationService.search(searchByNameDto);
   }
 
@@ -50,5 +53,15 @@ export class LocationController {
   @Delete(':id')
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.locationService.remove(id);
+  }
+
+  @Post(':id/comment')
+  addComment(
+    @Param('id', ParseIntPipe) locationId: number,
+    @Body() addCommentDto: CreateCommentDto,
+    @Headers('authorization') bearerToken: string,
+  ) {
+    const token = bearerToken.split(' ')[1];
+    return this.locationService.addComment(token, locationId, addCommentDto);
   }
 }

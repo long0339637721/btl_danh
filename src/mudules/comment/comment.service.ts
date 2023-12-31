@@ -1,11 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { UpdateCommentDto } from './dto/update-comment.dto';
+import { CommentRepository } from './comment.repository';
+import { LocationEntity } from '../location/entities/location.entity';
+import { UserEntity } from '../user/entities/user.entity';
 
 @Injectable()
 export class CommentService {
-  create(createCommentDto: CreateCommentDto) {
-    return 'This action adds a new comment';
+  constructor(private readonly commentRepository: CommentRepository) {}
+
+  create(user: UserEntity, location: LocationEntity, content: string) {
+    return this.commentRepository.create(user, location, content);
   }
 
   findAll() {
@@ -22,5 +27,9 @@ export class CommentService {
 
   remove(id: number) {
     return `This action removes a #${id} comment`;
+  }
+
+  findByLocation(location: LocationEntity) {
+    return this.commentRepository.findByLocation(location);
   }
 }
