@@ -22,7 +22,7 @@ export class LocationService {
   ) {}
 
   create(createLocationDto: CreateLocationDto) {
-    return 'This action adds a new location';
+    return this.locationRepository.create(createLocationDto);
   }
 
   findAll() {
@@ -42,7 +42,11 @@ export class LocationService {
   }
 
   update(id: number, updateLocationDto: UpdateLocationDto) {
-    return `This action updates a #${id} location`;
+    const locationEntity = this.locationRepository.findOneById(id);
+    if (!locationEntity) {
+      throw new NotFoundException(`Location #${id} not found`);
+    }
+    return this.locationRepository.update(id, updateLocationDto);
   }
 
   remove(id: number) {

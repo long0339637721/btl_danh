@@ -3,6 +3,8 @@ import { DataSource, Like, Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 
 import { LocationEntity } from './entities/location.entity';
+import { CreateLocationDto } from './dto/create-location.dto';
+import { UpdateLocationDto } from './dto/update-location.dto';
 
 @Injectable()
 export class LocationRepository {
@@ -40,4 +42,12 @@ export class LocationRepository {
       },
     });
   }
+
+  create = async (location: CreateLocationDto) => {
+    return this.locationRepository.save(location);
+  };
+
+  update = async (id: number, location: UpdateLocationDto) => {
+    return this.locationRepository.update({ id: id }, location);
+  };
 }

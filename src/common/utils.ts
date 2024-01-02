@@ -1,5 +1,7 @@
 import * as bcrypt from 'bcrypt';
 import * as fs from 'fs';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 /**
  * generate hash from password or string
